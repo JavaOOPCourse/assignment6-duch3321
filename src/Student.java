@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 public class Student implements Comparable<Student> {
     private String name;
     private double gpa;
@@ -18,7 +20,7 @@ public class Student implements Comparable<Student> {
     // TODO: Task 1 — Добавь возможность изменить GPA
     public void setGpa(double newGpa) {
         // заглушка
-        if(newGpa<=4 && newGpa>0){
+        if(newGpa>=0 && newGpa<=4){
             this.gpa=newGpa;
         }
     }
@@ -37,4 +39,20 @@ public class Student implements Comparable<Student> {
                 +" , Age : "+this.age
                 +" , GPA : "+this.gpa;
     }
+}
+
+class NameCompare implements Comparator<Student>{
+    public int compare(Student s1 , Student s2){
+        return s1.getName().compareTo(s2.getName());
+    }
+}
+
+class GpaNameCompare implements Comparator<Student>{
+    public int compare(Student s1 , Student s2){
+        int result = Double.compare(s2.getGpa(),s1.getGpa());
+        if(result==0){
+            return s1.getName().compareTo(s2.getName());
+        }return result ;
+    }
+
 }
